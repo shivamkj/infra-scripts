@@ -1,0 +1,11 @@
+services:
+  envoy:
+    image: envoyproxy/envoy:contrib-v1.33.0
+    ports:
+      - "5099:5099"
+      - "9901:9901"
+    volumes:
+      - ./config.yaml:/etc/envoy/envoy.yaml
+
+# Access metrics at: http://localhost:9901/stats/prometheus
+# Admin Interface: http://localhost:9901

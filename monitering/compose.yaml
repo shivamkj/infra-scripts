@@ -1,0 +1,26 @@
+services:
+  prometheus:
+    image: prom/prometheus:v3.2.0
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prom-config.yaml:/etc/prometheus/config.yaml
+    command:
+      - --config.file=/etc/prometheus/config.yaml
+    depends_on:
+      - node-exporter
+  node-exporter:
+    image: prom/node-exporter:v1.9.0
+    ports:
+      - 9100:9100
+  grafana:
+    image: grafana/grafana:11.5.2-ubuntu
+    ports:
+      - '3003:3000'
+    depends_on:
+      - prometheus
+
+# Grafana at: http://localhost:3003/ (User-admin, password-admin)
+# Prometheus at: http://localhost:9090/
+
+# Reload config: docker compose restart prometheus

@@ -1,0 +1,20 @@
+services:
+  traefik:
+    image: "traefik:v3.3.3"
+    command:
+      - --log.level=DEBUG
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entryPoints.web.address=:2888
+      - --metrics.prometheus=true
+      - --entryPoints.metrics.address=:2889
+      - --metrics.prometheus.entryPoint=metrics
+    ports:
+      - 2888:2888
+      - 2889:2889
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # - ./config.yaml:/traefik.yml:ro
+
+# Metrics at: http://localhost:2889/metrics

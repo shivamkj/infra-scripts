@@ -1,0 +1,14 @@
+services:
+  nginx:
+    # image: nginx:1.26.3-bookworm
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 7001:80
+    volumes:
+      - ./html:/usr/share/nginx/html
+      - ./:/etc/nginx
+
+# Metrics (HTML) at: http://localhost:7001/metrics
+# Metrics (Prometheus) at: http://localhost:7001/metrics/format/prometheus

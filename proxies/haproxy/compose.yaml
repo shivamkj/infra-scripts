@@ -1,0 +1,13 @@
+services:
+  haproxy:
+    image: haproxy:3.2-dev-bookworm
+    ports:
+      - "6100:6100"
+      - "6201:6201"
+      - "6202:6202"
+      - "6203:6203"
+    volumes:
+      - ./:/usr/local/etc/haproxy
+
+# Stats at: http://localhost:6203/stats
+# Metrics at: http://localhost:6202/metrics
